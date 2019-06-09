@@ -2,11 +2,19 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 
 // IMPORT ROUTES
 const productRoutes = require('./api/routes/products');
 const ordersRoutes = require('./api/routes/orders');
+
+
+// spróbować usunąć drugi argument (ponoć teraz działa bez niego)
+mongoose.connect('mongodb+srv://test-user:' + process.env.MONGO_ATLAS_PASSWORD + '@restapitutorial-we4ni.mongodb.net/test?retryWrites=true&w=majority',
+    {
+        useNewUrlParser: true
+    });
 
 
 app.use(morgan('dev'));
@@ -32,6 +40,7 @@ app.use('/products', productRoutes);
 app.use('/orders', ordersRoutes);
 
 
+// ERROR HANDLING
 app.use((req, res, next) => {
     const error = new Error('Not found');
     error.status = 404;
