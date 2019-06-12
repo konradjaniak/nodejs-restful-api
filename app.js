@@ -10,20 +10,21 @@ const productRoutes = require('./api/routes/products');
 const ordersRoutes = require('./api/routes/orders');
 
 
-// spróbować usunąć drugi argument (ponoć teraz działa bez niego)
+// CONNECT TO DATABASE
 mongoose.connect('mongodb+srv://test-user:' + process.env.MONGO_ATLAS_PASSWORD + '@restapitutorial-we4ni.mongodb.net/test?retryWrites=true&w=majority',
-    {
-        useNewUrlParser: true
-    });
+{ useNewUrlParser: true });
 
 
+// START LOGGING TO CONSOLE
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
+
+
+// PARSE INCOMING REQUESTS
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 
+// ALLOW CORS
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');

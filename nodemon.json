@@ -1,5 +1,5 @@
 {
     "env": {
-        "MONGO_ATLAS_PASSWORD": "test-password"
+        "MONGO_ATLAS_PASSWORD": "new-test-password"
     }
 }
